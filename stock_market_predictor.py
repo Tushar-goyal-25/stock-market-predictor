@@ -15,6 +15,16 @@ data = yf.download('AAPL', start = '2012-01-01', end='2024-03-30')
 #Get the number of rows and columns
 # print(data.shape)
 
+def accuracycalc(valid, prediction):
+    # Calculate the absolute percentage error
+    abs_error = np.abs(valid.values - prediction) / valid.values
+    print (abs_error)
+    # Calculate the mean absolute percentage error
+    mean_abs_error = np.mean(abs_error)
+    # Calculate the accuracy
+    accuracy = 1 - mean_abs_error
+    return accuracy
+
 #Visualise closing price 
 # plt.figure(figsize=(16,8))
 # plt.title('Close Price')
@@ -116,5 +126,6 @@ pred_price = model.predict(X_test)
 #undo scaling
 pred_price = scaler.inverse_transform(pred_price)
 print(pred_price)
+# print(accuracycalc(valid['Close'], predictions))
 
 
